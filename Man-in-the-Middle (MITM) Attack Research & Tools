@@ -1,0 +1,25 @@
+This repository is a collection of tools, scripts, labs, and research related to Man-in-the-Middle (MITM) attacks, covering how these attacks work, how to simulate them in controlled environments, and how to detect and prevent them.
+
+🔍 Topics Covered:
+🌐 ARP Spoofing & DNS Spoofing Attacks
+
+🔐 HTTPS Interception & SSL Stripping (e.g., with Bettercap, mitmproxy)
+
+🧪 Lab Setup for MITM Testing (Kali Linux, Virtual LANs, Wi-Fi APs)
+
+🐍 Python Scripts for Packet Manipulation (Scapy)
+
+🛡️ Detection & Defense Techniques (IDS rules, certificate pinning, firewall configurations)
+
+📚 Case Studies on MITM Attacks in the Wild
+
+
+
+net.probe on
+net.recon on
+set events.stream.http.response.dump true
+set events.stream.http.request.dump true
+events.stream off
+events.stream on
+set net.sniff.local true
+net.sniff on
